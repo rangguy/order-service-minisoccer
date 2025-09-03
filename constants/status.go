@@ -1,46 +1,46 @@
 package constants
 
-type PaymentStatus int
-type PaymentStatusString string
+type OrderStatus int
+type OrderStatusString string
 
 const (
-	Initial    PaymentStatus = 0
-	Pending    PaymentStatus = 100
-	Settlement PaymentStatus = 200
-	Expire     PaymentStatus = 300
+	Pending        OrderStatus = 100
+	PendingPayment OrderStatus = 200
+	PaymentSuccess OrderStatus = 300
+	Expired        OrderStatus = 400
 
-	InitialString    PaymentStatusString = "initial"
-	PendingString    PaymentStatusString = "pending"
-	SettlementString PaymentStatusString = "settlement"
-	ExpireString     PaymentStatusString = "expire"
+	PendingString        OrderStatusString = "pending"
+	PendingPaymentString OrderStatusString = "pending-payment"
+	PaymentSuccessString OrderStatusString = "payment-success"
+	ExpiredString        OrderStatusString = "expired"
 )
 
-var mapStatusStringToInt = map[PaymentStatusString]PaymentStatus{
-	InitialString:    Initial,
-	PendingString:    Pending,
-	SettlementString: Settlement,
-	ExpireString:     Expire,
+var mapStatusStringToInt = map[OrderStatusString]OrderStatus{
+	PendingString:        Pending,
+	PendingPaymentString: PendingPayment,
+	PaymentSuccessString: PaymentSuccess,
+	ExpiredString:        Expired,
 }
 
-var mapStatusIntToString = map[PaymentStatus]PaymentStatusString{
-	Initial:    InitialString,
-	Pending:    PendingString,
-	Settlement: SettlementString,
-	Expire:     ExpireString,
+var mapStatusIntToString = map[OrderStatus]OrderStatusString{
+	Pending:        PendingString,
+	PendingPayment: PendingPaymentString,
+	PaymentSuccess: PaymentSuccessString,
+	Expired:        ExpiredString,
 }
 
-func (p PaymentStatusString) String() string {
+func (p OrderStatusString) String() string {
 	return string(p)
 }
 
-func (p PaymentStatus) Int() int {
+func (p OrderStatus) Int() int {
 	return int(p)
 }
 
-func (p PaymentStatus) GetStatusString() PaymentStatusString {
+func (p OrderStatus) GetStatusString() OrderStatusString {
 	return mapStatusIntToString[p]
 }
 
-func (p PaymentStatusString) GetStatusInt() PaymentStatus {
+func (p OrderStatusString) GetStatusInt() OrderStatus {
 	return mapStatusStringToInt[p]
 }

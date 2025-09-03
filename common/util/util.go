@@ -1,15 +1,12 @@
 package util
 
 import (
-	"bytes"
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
-	"github.com/SebastiaanKlippert/go-wkhtmltopdf"
 	"github.com/dustin/go-humanize"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"html/template"
 	"math"
 	"os"
 	"reflect"
@@ -172,44 +169,9 @@ func BindFromConsul(dest any, endPoint, path string) error {
 	return nil
 }
 
-func add1(a int) int {
-	return a + 1
-}
-
-func GeneratePDFFromHTML(htmlTemplate string, data any) ([]byte, error) {
-	funcMap := template.FuncMap{
-		"add1": add1,
+func Recover() {
+	if r := recover(); r != nil {
+		logrus.SetLevel(logrus.ErrorLevel)
+		logrus.Errorf("Recovering from panic: %v", r)
 	}
-
-	template, err := template.New("htmlTemplate").Funcs(funcMap).Parse(htmlTemplate)
-	if err != nil {
-		return nil, err
-	}
-
-	var filledTemplate bytes.Buffer
-	if err = template.Execute(&filledTemplate, data); err != nil {
-		return nil, err
-	}
-
-	htmlContent := filledTemplate.String()
-	pdfGenerator, err := wkhtmltopdf.NewPDFGenerator()
-	if err != nil {
-		logrus.Errorf("failed to create pdf generator: %v", err)
-		return nil, err
-	}
-
-	pdfGenerator.Dpi.Set(600)
-	pdfGenerator.NoCollate.Set(false)
-	pdfGenerator.Orientation.Set(wkhtmltopdf.OrientationPortrait)
-	pdfGenerator.PageSize.Set(wkhtmltopdf.PageSizeA4)
-	pdfGenerator.Grayscale.Set(false)
-	pdfGenerator.AddPage(wkhtmltopdf.NewPageReader(strings.NewReader(htmlContent)))
-
-	err = pdfGenerator.Create()
-	if err != nil {
-		logrus.Errorf("failed to create pdf: %v", err)
-		return nil, err
-	}
-
-	return pdfGenerator.Bytes(), nil
 }

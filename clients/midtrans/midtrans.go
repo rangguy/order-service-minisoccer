@@ -4,7 +4,7 @@ import (
 	"github.com/midtrans/midtrans-go"
 	"github.com/midtrans/midtrans-go/snap"
 	"github.com/sirupsen/logrus"
-	errConstant "order-service/constants/error/payment"
+	errConstant "order-service/constants/error/order"
 	"order-service/domain/dto"
 	"time"
 )
