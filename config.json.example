@@ -1,0 +1,45 @@
+{
+  "port": 8004,
+  "appName": "order-service",
+  "appEnv": "local",
+  "signatureKey": "",
+  "database": {
+    "host": "lcoalhost",
+    "port": ,
+    "name": "",
+    "username": "",
+    "password": "",
+    "maxOpenConnection": ,
+    "maxLifetimeConnection": ,
+    "maxIdleConnection": ,
+    "maxIdleTime":
+  },
+  "rateLimiterMaxRequest": 1000,
+  "rateLimiterTimeSecond": 60,
+  "internalService": {
+    "user": {
+      "host": "http://localhost:8001",
+      "signatureKey": ""
+    },
+    "field": {
+      "host": "http://localhost:8002",
+      "signatureKey": ""
+    },
+    "payment": {
+      "host": "http://localhost:8003",
+      "signatureKey": ""
+    }
+  },
+  "kafka": {
+    "brokers": [
+      "localhost:9092"
+    ],
+    "timeoutInMs": 100,
+    "maxRetry": 3,
+    "maxWaitTimeInMs": 100,
+    "maxProcessingTimeInMs": 200,
+    "backoffTimeInMs": 100,
+    "topics": [""],
+    "groupID": ""
+  }
+}

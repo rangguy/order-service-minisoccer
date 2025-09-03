@@ -1,0 +1,12 @@
+name: booking-order-app
+services:
+  payment-service:
+    container_name: payment-service
+    image: ranggad/payment-service:1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    env_file:
+      - .env
