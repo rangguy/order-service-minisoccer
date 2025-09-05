@@ -11,7 +11,7 @@ type PaymentResponse struct {
 
 type PaymentData struct {
 	UUID          uuid.UUID `json:"uuid"`
-	OrderID       string    `json:"order_id"`
+	OrderID       string    `json:"orderID"`
 	Amount        float64   `json:"amount"`
 	Status        string    `json:"status"`
 	PaymentLink   string    `json:"paymentLink"`

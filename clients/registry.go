@@ -2,24 +2,44 @@ package clients
 
 import (
 	"order-service/clients/config"
-	clients "order-service/clients/user"
-	config2 "order-service/config"
+	fieldClient "order-service/clients/field"
+	paymentClient "order-service/clients/payment"
+	userClient "order-service/clients/user"
+	configApp "order-service/config"
 )
 
 type ClientRegistry struct{}
 
 type IClientRegistry interface {
-	GetUser() clients.IUserClient
+	GetUser() userClient.IUserClient
+	GetPayment() paymentClient.IPaymentClient
+	GetField() fieldClient.IFieldClient
 }
 
 func NewClientRegistry() IClientRegistry {
 	return &ClientRegistry{}
 }
 
-func (c *ClientRegistry) GetUser() clients.IUserClient {
-	return clients.NewUserClient(
+func (c *ClientRegistry) GetUser() userClient.IUserClient {
+	return userClient.NewUserClient(
 		config.NewClientConfig(
-			config.WithBaseURL(config2.Config.InternalService.User.Host),
-			config.WithSignatureKey(config2.Config.InternalService.User.SignatureKey),
+			config.WithBaseURL(configApp.Config.InternalService.User.Host),
+			config.WithSignatureKey(configApp.Config.InternalService.User.SignatureKey),
+		))
+}
+
+func (c *ClientRegistry) GetPayment() paymentClient.IPaymentClient {
+	return paymentClient.NewPaymentClient(
+		config.NewClientConfig(
+			config.WithBaseURL(configApp.Config.InternalService.Payment.Host),
+			config.WithSignatureKey(configApp.Config.InternalService.Payment.SignatureKey),
+		))
+}
+
+func (c *ClientRegistry) GetField() fieldClient.IFieldClient {
+	return fieldClient.NewFieldClient(
+		config.NewClientConfig(
+			config.WithBaseURL(configApp.Config.InternalService.Field.Host),
+			config.WithSignatureKey(configApp.Config.InternalService.Field.SignatureKey),
 		))
 }
