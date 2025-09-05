@@ -15,7 +15,7 @@ type PaymentData struct {
 }
 
 type PaymentContent struct {
-	Event    KafkaEvent    `json:"event"`
-	Metadata KafkaMetaData `json:"metadata"`
-	Body     PaymentData   `json:"body"`
+	Event    KafkaEvent             `json:"event"`
+	Metadata KafkaMetaData          `json:"metadata"`
+	Body     KafkaBody[PaymentData] `json:"body"`
 }

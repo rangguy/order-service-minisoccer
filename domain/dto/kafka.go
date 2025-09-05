@@ -1,10 +1,5 @@
 package dto
 
-import (
-	"github.com/google/uuid"
-	"time"
-)
-
 type KafkaEvent struct {
 	Name string `json:"name"`
 }
@@ -14,21 +9,15 @@ type KafkaMetaData struct {
 	SendingAt string `json:"sendingAt"`
 }
 
-type KafkaData struct {
-	OrderID   uuid.UUID  `json:"orderID"`
-	PaymentID uuid.UUID  `json:"paymentID"`
-	Status    string     `json:"status"`
-	ExpiredAt time.Time  `json:"expiredAt"`
-	PaidAt    *time.Time `json:"paidAt"`
+type DataType string
+
+type KafkaBody[T any] struct {
+	Type string `json:"type"`
+	Data T      `json:"data"`
 }
 
-type KafkaBody struct {
-	Type string     `json:"type"`
-	Data *KafkaData `json:"data"`
-}
-
-type KafkaMessage struct {
+type KafkaMessage[T any] struct {
 	Event    KafkaEvent    `json:"event"`
 	Metadata KafkaMetaData `json:"metadata"`
-	Body     KafkaBody     `json:"body"`
+	Body     KafkaBody[T]  `json:"body"`
 }
