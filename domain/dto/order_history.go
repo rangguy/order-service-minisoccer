@@ -2,7 +2,7 @@ package dto
 
 import "order-service/constants"
 
-type OrderHistory struct {
+type OrderHistoryRequest struct {
 	OrderID uint
 	Status  constants.OrderStatusString
 }
