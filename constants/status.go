@@ -29,18 +29,22 @@ var mapStatusIntToString = map[OrderStatus]OrderStatusString{
 	Expired:        ExpiredString,
 }
 
-func (p OrderStatusString) String() string {
-	return string(p)
+func (o OrderStatusString) String() string {
+	return string(o)
 }
 
-func (p OrderStatus) Int() int {
-	return int(p)
+func (o OrderStatus) Int() int {
+	return int(o)
 }
 
-func (p OrderStatus) GetStatusString() OrderStatusString {
-	return mapStatusIntToString[p]
+func (o OrderStatus) GetStatusString() OrderStatusString {
+	return mapStatusIntToString[o]
 }
 
-func (p OrderStatusString) GetStatusInt() OrderStatus {
-	return mapStatusStringToInt[p]
+func (o OrderStatusString) GetStatusInt() OrderStatus {
+	return mapStatusStringToInt[o]
+}
+
+func (o OrderStatusString) GetStatusString() OrderStatusString {
+	return o
 }
