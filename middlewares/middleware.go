@@ -10,11 +10,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"net/http"
-	"payment-service/clients"
-	"payment-service/common/response"
-	"payment-service/config"
-	"payment-service/constants"
-	errConstant "payment-service/constants/error"
+	"order-service/clients"
+	"order-service/common/response"
+	"order-service/config"
+	"order-service/constants"
+	errConstant "order-service/constants/error"
 	"strings"
 )
 
@@ -103,6 +103,8 @@ func CheckRole(roles []string, client clients.IClientRegistry) gin.HandlerFunc {
 			responseUnauthorized(c, errConstant.ErrUnauthorized.Error())
 			return
 		}
+		userLogin := c.Request.WithContext(context.WithValue(c.Request.Context(), constants.User, user))
+		c.Request = userLogin
 		c.Next()
 	}
 }

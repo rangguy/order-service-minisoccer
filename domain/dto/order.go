@@ -31,7 +31,7 @@ type OrderResponse struct {
 
 type OrderByUserIDResponse struct {
 	Code        string                      `json:"code"`
-	Amount      float64                     `json:"amount"`
+	Amount      string                      `json:"amount"`
 	Status      constants.OrderStatusString `json:"status"`
 	OrderDate   string                      `json:"orderDate"`
 	PaymentLink string                      `json:"paymentLink"`
