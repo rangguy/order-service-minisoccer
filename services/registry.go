@@ -1,30 +1,29 @@
 package services
 
 import (
-	clients "payment-service/clients/midtrans"
-	"payment-service/controllers/kafka"
-	"payment-service/repositories"
-	services "payment-service/services/payment"
+	"order-service/clients"
+	"order-service/controllers/kafka"
+	"order-service/repositories"
+	services "order-service/services/order"
 )
 
 type Registry struct {
 	repository repositories.IRepositoryRegistry
+	client     clients.IClientRegistry
 	kafka      kafka.IKafkaRegistry
-	midtrans   clients.IMidtransClient
 }
 
 type IServiceRegistry interface {
-	GetPayment() services.IPaymentService
+	GetOrder() services.IOrderService
 }
 
-func NewServiceRegistry(repository repositories.IRepositoryRegistry, kafka kafka.IKafkaRegistry, midtrans clients.IMidtransClient) IServiceRegistry {
+func NewServiceRegistry(repository repositories.IRepositoryRegistry, client clients.IClientRegistry) IServiceRegistry {
 	return &Registry{
 		repository: repository,
-		kafka:      kafka,
-		midtrans:   midtrans,
+		client:     client,
 	}
 }
 
-func (r *Registry) GetPayment() services.IPaymentService {
-	return services.NewPaymentService(r.repository, r.kafka, r.midtrans)
+func (r *Registry) GetOrder() services.IOrderService {
+	return services.NewOrderService(r.repository, r.client)
 }
