@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	controllers "payment-service/controllers/http/payment"
-	"payment-service/services"
+	controllers "order-service/controllers/http/order"
+	"order-service/services"
 )
 
 type Registry struct {
@@ -10,13 +10,13 @@ type Registry struct {
 }
 
 type IControllerRegistry interface {
-	GetPayment() controllers.IPaymentController
+	GetOrder() controllers.IOrderController
 }
 
 func NewControllerRegistry(service services.IServiceRegistry) IControllerRegistry {
 	return &Registry{service: service}
 }
 
-func (r *Registry) GetPayment() controllers.IPaymentController {
-	return controllers.NewPaymentController(r.service)
+func (r *Registry) GetOrder() controllers.IOrderController {
+	return controllers.NewOrderController(r.service)
 }

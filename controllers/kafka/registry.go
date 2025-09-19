@@ -1,7 +1,7 @@
 package kafka
 
 import (
-	"order-service/controllers/kafka/payment"
+	kafka "order-service/controllers/kafka/payment"
 	"order-service/services"
 )
 
