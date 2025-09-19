@@ -1,6 +1,6 @@
 package main
 
-import "payment-service/cmd"
+import "order-service/cmd"
 
 func main() {
 	cmd.Run()
