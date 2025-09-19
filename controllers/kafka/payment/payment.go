@@ -10,6 +10,8 @@ import (
 	"order-service/services"
 )
 
+const PaymentTopic = "payment-service-callback"
+
 type PaymentKafka struct {
 	service services.IServiceRegistry
 }

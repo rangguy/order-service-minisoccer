@@ -10,13 +10,13 @@ type Registry struct {
 }
 
 type IKafkaRegistry interface {
-	GetPaymentKafka() kafka.IPaymentKafka
+	GetPayment() kafka.IPaymentKafka
 }
 
 func NewKafkaRegistry(service services.IServiceRegistry) *Registry {
 	return &Registry{service: service}
 }
 
-func (r *Registry) GetPaymentKafka() kafka.IPaymentKafka {
+func (r *Registry) GetPayment() kafka.IPaymentKafka {
 	return kafka.NewPaymentKafka(r.service)
 }
