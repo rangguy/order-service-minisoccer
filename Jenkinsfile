@@ -9,6 +9,7 @@ pipeline {
     HOST = credentials('host')
     USERNAME = credentials('username')
     CONSUL_HTTP_URL = credentials('consul-http-url')
+    CONSUL_HTTP_KEY = "backend/order-service"
     CONSUL_HTTP_TOKEN = credentials('consul-http-token')
     CONSUL_WATCH_INTERVAL_SECONDS = 60
   }
