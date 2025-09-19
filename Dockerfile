@@ -49,6 +49,6 @@ COPY --from=builder /bin/wkhtmltopdf /bin/wkhtmltopdf
 COPY --from=builder /bin/wkhtmltoimage /bin/wkhtmltoimage
 
 WORKDIR /app
-EXPOSE 8003
+EXPOSE 8004
 
-ENTRYPOINT ["/app/payment-service"]
+ENTRYPOINT ["/app/order-service"]
