@@ -1,17 +1,22 @@
 package kafka
 
+import (
+	"order-service/controllers/kafka/payment"
+	"order-service/services"
+)
+
 type Registry struct {
-	brokers []string
+	service services.IServiceRegistry
 }
 
 type IKafkaRegistry interface {
-	GetKafkaProducer() IKafka
+	GetPaymentKafka() kafka.IPaymentKafka
 }
 
-func NewKafkaRegistry(brokers []string) *Registry {
-	return &Registry{brokers}
+func NewKafkaRegistry(service services.IServiceRegistry) *Registry {
+	return &Registry{service: service}
 }
 
-func (r *Registry) GetKafkaProducer() IKafka {
-	return NewKafkaProducer(r.brokers)
+func (r *Registry) GetPaymentKafka() kafka.IPaymentKafka {
+	return kafka.NewPaymentKafka(r.service)
 }
