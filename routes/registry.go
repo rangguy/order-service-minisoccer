@@ -2,9 +2,9 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"payment-service/clients"
-	controllers "payment-service/controllers/http"
-	routes "payment-service/routes/payment"
+	"order-service/clients"
+	controllers "order-service/controllers/http"
+	routes "order-service/routes/order"
 )
 
 type Registry struct {
@@ -26,9 +26,9 @@ func NewRouteRegistry(controller controllers.IControllerRegistry, group *gin.Rou
 }
 
 func (r *Registry) Serve() {
-	r.paymentRoute().Run()
+	r.orderRoute().Run()
 }
 
-func (r *Registry) paymentRoute() routes.IPaymentRoute {
-	return routes.NewPaymentRoute(r.group, r.controller, r.client)
+func (r *Registry) orderRoute() routes.IOrderRoute {
+	return routes.NewOrderRoute(r.group, r.controller, r.client)
 }
